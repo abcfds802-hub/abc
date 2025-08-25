@@ -119,31 +119,7 @@ Registry.as<IEditorPaneRegistry>(EditorExtensions.EditorPane).registerEditorPane
 
 // Settings action removed - no longer registering the gear button
 
-	async run(accessor: ServicesAccessor): Promise<void> {
-		const editorService = accessor.get(IEditorService);
-		const editorGroupService = accessor.get(IEditorGroupsService);
-
-		const instantiationService = accessor.get(IInstantiationService);
-
-		// if is open, close it
-		const openEditors = editorService.findEditors(VoidSettingsInput.RESOURCE); // should only have 0 or 1 elements...
-		if (openEditors.length !== 0) {
-			const openEditor = openEditors[0].editor
-			const isCurrentlyOpen = editorService.activeEditor?.resource?.fsPath === openEditor.resource?.fsPath
-			if (isCurrentlyOpen)
-				await editorService.closeEditors(openEditors)
-			else
-				await editorGroupService.activeGroup.openEditor(openEditor)
-			return;
-		}
-
-
-		// else open it
-		const input = instantiationService.createInstance(VoidSettingsInput);
-
-		await editorGroupService.activeGroup.openEditor(input);
-	}
-})
+// Removed orphaned function code
 
 
 
